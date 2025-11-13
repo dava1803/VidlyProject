@@ -1,0 +1,19 @@
+﻿@model VidlyProject.Models.Customer
+
+@{
+    ViewBag.Title = "Customer Details";
+}
+
+<h2>Customer Details</h2>
+
+<div class="card mt-4 p-3 shadow-sm">
+    <h4>@Model.Name</h4>
+    <hr />
+    <p><strong>Membership Type:</strong> @Model.MembershipType.Name</p>
+    <p><strong>Discount Rate:</strong> @(Model.MembershipType != null ? Model.MembershipType.DiscountRate + "%" : "N/A")</p>
+    <p><strong>Birthdate:</strong> @(Model.Birthdate.HasValue ? Model.Birthdate.Value.ToString("dd MMM yyyy") : "Not Available")</p>
+</div>
+
+<p>
+    @Html.ActionLink("Back to List", "Index", "Customers", null, new { @class = "btn btn-secondary mt-3" })
+</p>

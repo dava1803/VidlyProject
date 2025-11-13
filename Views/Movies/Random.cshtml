@@ -1,0 +1,40 @@
+﻿@model VidlyProject.ViewModels.RandomMovieViewModel
+
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies List</h2>
+
+<p>
+    @Html.ActionLink("New Movie", "New", "Movies", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Movie Name</th>
+            <th>Genre</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td>@movie.Id</td>
+                <td>@movie.Name</td>
+                <td>@movie.Genre.Name</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Movies", new { id = movie.Id }, new { @class = "btn btn-warning btn-sm" })
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", "Movies", new { id = movie.Id })" class="btn btn-info btn-sm">Details</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

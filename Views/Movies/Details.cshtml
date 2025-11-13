@@ -1,0 +1,24 @@
+﻿@model VidlyProject.Models.Movie
+
+@{
+    ViewBag.Title = "Movie Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+
+<dl class="dl-horizontal">
+    <dt>Genre</dt>
+    <dd>@Model.Genre.Name</dd>
+
+    <dt>Release Date</dt>
+    <dd>@(Model.ReleaseDate.HasValue ? Model.ReleaseDate.Value.ToString("d MMM yyyy") : "N/A")</dd>
+
+    <dt>Date Added</dt>
+    <dd>@(Model.DateAdded.HasValue ? Model.DateAdded.Value.ToString("d MMM yyyy") : "N/A")</dd>
+
+    <dt>Number In Stock</dt>
+    <dd>@Model.NumberInStock</dd>
+</dl>
+
+<a href="@Url.Action("Random", "Movies")" class="btn btn-default">Back to List</a>
