@@ -1,100 +1,100 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Web.Mvc;
-using VidlyProject.Models;
-using VidlyProject.ViewModels;
+﻿    using System.Data.Entity;
+    using System.Linq;
+    using System.Web.Mvc;
+    using VidlyProject.Models;
+    using VidlyProject.ViewModels;
 
-namespace VidlyProject.Controllers
-{
-    public class CustomersController : Controller
+    namespace VidlyProject.Controllers
     {
-        private ApplicationDbContext _context;
-
-        public CustomersController()
+        public class CustomersController : Controller
         {
-            _context = new ApplicationDbContext();
-        }
+            private ApplicationDbContext _context;
 
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
-        }
-
-        public ActionResult New()
-        {
-            var membershipTypes = _context.MembershipTypes.ToList();
-            var viewModel = new CustomerFormViewModel()
+            public CustomersController()
             {
-                Customer = new Customer(),
-                MembershipTypes = membershipTypes
-            };
-            return View("CustomerForm", viewModel);
-        }
+                _context = new ApplicationDbContext();
+            }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Save(Customer customer)
-        {
-            if (!ModelState.IsValid)
+            protected override void Dispose(bool disposing)
             {
+                _context.Dispose();
+            }
+
+            public ActionResult New()
+            {
+                var membershipTypes = _context.MembershipTypes.ToList();
+                var viewModel = new CustomerFormViewModel()
+                {
+                    Customer = new Customer(),
+                    MembershipTypes = membershipTypes
+                };
+                return View("CustomerForm", viewModel);
+            }
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public ActionResult Save(Customer customer)
+            {
+                if (!ModelState.IsValid)
+                {
+                    var viewModel = new CustomerFormViewModel
+                    {
+                        Customer = customer,
+                        MembershipTypes = _context.MembershipTypes.ToList()
+                    };
+
+                    return View("CustomerForm", viewModel);
+                }
+                if (customer.Id == 0)
+                    _context.Customers.Add(customer);
+                else
+                {
+                    var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+
+                    customerInDb.Name = customer.Name;
+                    customerInDb.Birthdate = customer.Birthdate;
+                    customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                    customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+                
+                }
+                    _context.SaveChanges();
+                return RedirectToAction("Index", "Customers");
+            }
+            // GET: Customers
+            public ViewResult Index()
+            {
+                //var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+                //return View(customers);
+                return View();
+
+            }
+
+            // GET: Customers/Details/5
+            public ActionResult Details(int id)
+            {
+                var customer = _context.Customers
+                                       .Include(c => c.MembershipType) // Include biar MembershipType muncul
+                                       .SingleOrDefault(c => c.Id == id);
+                if (customer == null)
+                    return HttpNotFound();
+
+                return View(customer);
+            }
+            public ActionResult Edit(int id)
+            {
+                var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+                if (customer == null)
+                    return HttpNotFound();
+
                 var viewModel = new CustomerFormViewModel
                 {
                     Customer = customer,
                     MembershipTypes = _context.MembershipTypes.ToList()
                 };
-
                 return View("CustomerForm", viewModel);
             }
-            if (customer.Id == 0)
-                _context.Customers.Add(customer);
-            else
-            {
-                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
-
-                customerInDb.Name = customer.Name;
-                customerInDb.Birthdate = customer.Birthdate;
-                customerInDb.MembershipTypeId = customer.MembershipTypeId;
-                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
-                
-            }
-                _context.SaveChanges();
-            return RedirectToAction("Index", "Customers");
-        }
-        // GET: Customers
-        public ViewResult Index()
-        {
-            var customers = _context.Customers
-                                    .Include(c => c.MembershipType) // Eager loading
-                                    .ToList();
-            return View(customers);
-        }
-
-        // GET: Customers/Details/5
-        public ActionResult Details(int id)
-        {
-            var customer = _context.Customers
-                                   .Include(c => c.MembershipType) // Include biar MembershipType muncul
-                                   .SingleOrDefault(c => c.Id == id);
-            if (customer == null)
-                return HttpNotFound();
-
-            return View(customer);
-        }
-        public ActionResult Edit(int id)
-        {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
-            if (customer == null)
-                return HttpNotFound();
-
-            var viewModel = new CustomerFormViewModel
-            {
-                Customer = customer,
-                MembershipTypes = _context.MembershipTypes.ToList()
-            };
-            return View("CustomerForm", viewModel);
         }
     }
-}
 
        
  

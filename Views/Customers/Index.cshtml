@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<VidlyProject.Models.Customer>
 
 <h2>Customers</h2>
-<p>Total: @Model.Count()</p>
+@*<p>Total: @Model.Count()</p>*@
 
 <table id="customers" class="table table-bordered table-hover">
     <thead>
@@ -14,18 +14,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var customer in Model)
+        @*@foreach (var customer in Model)
         {
             <tr>
                 <td>@customer.Id</td>
                 <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
-                <td>@customer.MembershipType?.Name</td>
+                <td>@customer.MembershipType.Name</td>
                 <td>@(customer.MembershipType != null ? customer.MembershipType.DiscountRate + "%" : "N/A")</td>
-                <td>
-                    <button data-customer-id="@customer.Id" class="btn-link js-delete">Delete</button>
-                </td>
+                <td> <button data-customer-id="@customer.Id" class="btn-link js-delete">Delete</button> </td>
             </tr>
-        }
+        }*@
     </tbody>
 </table>
 
@@ -38,7 +36,40 @@
 
     <script>
         $(document).ready(function () {
-            $("#customers").DataTable()
+            /*$("#customers").DataTable()*/
+            $("#customers").DataTable({
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    { data: "id" }, // ID
+
+                    {               // Customers (name + link edit)
+                        data: "name",
+                        render: function (data, type, customer) {
+                            return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+
+                    { data: "membershipType.name" }, // Membership Type
+
+                    {                                 // Discount Rate
+                        data: "membershipType.discountRate",
+                        render: function (data) {
+                            return data + "%";
+                        }
+                    },
+
+                    {                                 // Delete Button
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-customer-id='" + data + "'>Delete</button>";
+                        }
+                    }
+                ]
+            });
+
             $("#customers").on("click", ".js-delete", function () {
                 var button = $(this);
                 bootbox.confirm("Are you sure you want to delete this customer?", function (result) {
