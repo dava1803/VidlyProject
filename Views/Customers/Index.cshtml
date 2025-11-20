@@ -43,25 +43,24 @@
                     dataSrc: ""
                 },
                 columns: [
-                    { data: "id" }, // ID
-
-                    {               // Customers (name + link edit)
+                    { data: "id" },
+                    {
                         data: "name",
                         render: function (data, type, customer) {
                             return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
                         }
                     },
 
-                    { data: "membershipType.name" }, // Membership Type
+                    { data: "membershipType.name" }, 
 
-                    {                                 // Discount Rate
+                    {                                 
                         data: "membershipType.discountRate",
                         render: function (data) {
                             return data + "%";
                         }
                     },
 
-                    {                                 // Delete Button
+                    {                                
                         data: "id",
                         render: function (data) {
                             return "<button class='btn-link js-delete' data-customer-id='" + data + "'>Delete</button>";
