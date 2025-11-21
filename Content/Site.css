@@ -26,4 +26,8 @@ textarea {
 .input-validation-error {
     border: 2px solid red;
 }
+body {
+    padding-top: 20px;
+}
+
 
