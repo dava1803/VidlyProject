@@ -24,6 +24,6 @@ namespace VidlyProject
 				LoginPath = new PathString("/Account/Login"),
 
 			});
-        }
+		}
 	}
 }
