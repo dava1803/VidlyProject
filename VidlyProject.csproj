@@ -244,9 +244,9 @@
     <Compile Include="Migrations\202511100723027_UpdateDatabase.Designer.cs">
       <DependentUpon>202511100723027_UpdateDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202511250325167_InitialModel2.cs" />
-    <Compile Include="Migrations\202511250325167_InitialModel2.Designer.cs">
-      <DependentUpon>202511250325167_InitialModel2.cs</DependentUpon>
+    <Compile Include="Migrations\202512020704188_SeedUsers.cs" />
+    <Compile Include="Migrations\202512020704188_SeedUsers.Designer.cs">
+      <DependentUpon>202512020704188_SeedUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -553,8 +553,8 @@
     <EmbeddedResource Include="Migrations\202511100723027_UpdateDatabase.resx">
       <DependentUpon>202511100723027_UpdateDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202511250325167_InitialModel2.resx">
-      <DependentUpon>202511250325167_InitialModel2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202512020704188_SeedUsers.resx">
+      <DependentUpon>202512020704188_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

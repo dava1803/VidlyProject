@@ -54,8 +54,18 @@ public class ApplicationUserManager : UserManager<ApplicationUser>
                 RequireLowercase = true,
                 RequireUppercase = true,
             };
-           
-        return manager;
+
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if (dataProtectionProvider != null)
+            {
+                manager.UserTokenProvider =
+                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+            }
+
+            manager.EmailService = new EmailService();
+            manager.SmsService = new SmsService();
+
+            return manager;
     }
 }
 

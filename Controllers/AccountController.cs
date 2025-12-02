@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using VidlyProject.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace VidlyProject.Controllers
 {
@@ -145,6 +146,13 @@ namespace VidlyProject.Controllers
 
             if (result.Succeeded)
             {
+
+                ////temp code
+                //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                //await roleManager.CreateAsync(new IdentityRole("CanManageMovies"));
+                //await UserManager.AddToRoleAsync(user.Id, ("CanManageMovies"));
+
                 string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                 var callbackUrl = Url.Action(
                     "ConfirmEmail",
