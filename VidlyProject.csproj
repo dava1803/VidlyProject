@@ -255,6 +255,10 @@
     <Compile Include="Migrations\202512030340329_AddDrivingLicenseToApplicationUser.Designer.cs">
       <DependentUpon>202512030340329_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202512040328125_AddPhoneToApplicationUser.cs" />
+    <Compile Include="Migrations\202512040328125_AddPhoneToApplicationUser.Designer.cs">
+      <DependentUpon>202512040328125_AddPhoneToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -506,12 +510,12 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="ViewModels\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="ViewModels\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -569,6 +573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512030340329_AddDrivingLicenseToApplicationUser.resx">
       <DependentUpon>202512030340329_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512040328125_AddPhoneToApplicationUser.resx">
+      <DependentUpon>202512040328125_AddPhoneToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
