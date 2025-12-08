@@ -24,6 +24,8 @@ namespace VidlyProject.Models
 
         [Required (ErrorMessage = "Please enter number in stock ")]
         [Display(Name = "Number In Stock")]
+        [Range(1, 20)]
         public int NumberInStock { get; set; }
+        public int NumberAvailabe { get; set; }
     }
 }
