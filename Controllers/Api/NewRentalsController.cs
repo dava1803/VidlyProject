@@ -8,10 +8,10 @@ using VidlyProject.Models;
 
 namespace VidlyProject.Controllers.Api
 {
-    public class NewRentalController : ApiController
+    public class NewRentalsController : ApiController
     {
         private ApplicationDbContext _context;
-        public NewRentalController()
+        public NewRentalsController()
         {
             _context = new ApplicationDbContext();
         }
@@ -28,9 +28,9 @@ namespace VidlyProject.Controllers.Api
 
             foreach (var movie in movies)
             {
-                if (movie.NumberAvailabe == 0)
+                if (movie.NumberAvailable == 0)
                     return BadRequest("Movie is not available.");
-                movie.NumberAvailabe--;
+                movie.NumberAvailable--;
 
                 var rental = new Rental
                 {
@@ -39,8 +39,9 @@ namespace VidlyProject.Controllers.Api
                     DateRented = DateTime.Now
                 };
                 _context.Rentals.Add(rental);
- 
             }
+
+            _context.SaveChanges();
             return Ok();
         }
     }
