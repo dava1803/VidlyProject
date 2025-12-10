@@ -2,6 +2,7 @@
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
+using System.Configuration;
 using VidlyProject.Models;
 
 namespace VidlyProject
@@ -26,8 +27,8 @@ namespace VidlyProject
 
             // Facebook login
             app.UseFacebookAuthentication(
-                appId: "2837127656484720",
-                appSecret: "a865dd0aca1fee297f2d7416b991808d"
+                appId: ConfigurationManager.AppSettings["FacebookAppId"],
+                appSecret: ConfigurationManager.AppSettings["FacebookAppSecret"]
             );
         }
     }
