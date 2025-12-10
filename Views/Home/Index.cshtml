@@ -4,7 +4,7 @@
 
 <main>
     <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET @DateTime.Now.ToString()</h1>
+        <h1 id="title"></h1>
         <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
         <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
     </section>
@@ -31,3 +31,22 @@
         </section>
     </div>
 </main>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const formatted =
+            now.getFullYear() + "-" +
+            (now.getMonth() + 1).toString().padStart(2, '0') + "-" +
+            now.getDate().toString().padStart(2, '0') + " " +
+            now.getHours().toString().padStart(2, '0') + ":" +
+            now.getMinutes().toString().padStart(2, '0') + ":" +
+            now.getSeconds().toString().padStart(2, '0');
+
+        document.getElementById("title").textContent =
+            "Time " + formatted;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+</script>
+
